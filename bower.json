@@ -1,0 +1,14 @@
+{
+  "name": "adapt-assessment-singleSubmit",
+  "homepage": "https://github.com/cgkineo/adapt-assessment-singleSubmit",
+  "authors": [
+    "Oliver Foster <oliver.foster@kineo.com"
+  ],
+  "description": "%description",
+  "main": "/js/adapt-assessment-singleSubmit.js",
+  "keywords": [
+    "adapt-plugin",
+    "adapt-extension"
+  ],
+  "license": "GPLv3"
+}

@@ -1,0 +1,11 @@
+// To go in the article.json file
+{
+    "_assessment": {
+        "_isEnabled":true,
+        "_singleSubmit": {
+            "_isEnabled": true,
+            "_insertBeforeBlock": "b-31",
+            "submit": "Submit"
+        }
+    }
+}
