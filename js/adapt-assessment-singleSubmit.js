@@ -83,8 +83,8 @@ define(function(require) {
 	//LISTEN TO GLOBAL EVENTS
 		//SETUP VIEW
 		Adapt.on("articleView:preRender", function(view) {
-			if (!view.model.get("_assessment") && view.model.get("_assessment")._isEnable !== true) return;
-			if (!view.model.get("_assessment")._singleSubmit && view.model.get("_assessment")._singleSubmit._isEnable !== true) return;
+			if (typeof view.model.get("_assessment") === "undefined" || view.model.get("_assessment")._isEnabled !== true) return;
+			if (typeof view.model.get("_assessment")._singleSubmit === "undefined" || view.model.get("_assessment")._singleSubmit._isEnabled !== true) return;
 
 			SingleSubmit.settings = view.model.get("_assessment")._singleSubmit;
 
@@ -94,8 +94,8 @@ define(function(require) {
 		//INSERT BUTTON
 		Adapt.on("articleView:postRender", function(view) {
 
-			if (!view.model.get("_assessment") && view.model.get("_assessment")._isEnable !== true) return;
-			if (!view.model.get("_assessment")._singleSubmit && view.model.get("_assessment")._singleSubmit._isEnable !== true) return;
+			if (typeof view.model.get("_assessment") === "undefined" || view.model.get("_assessment")._isEnabled !== true) return;
+			if (typeof view.model.get("_assessment")._singleSubmit === "undefined" || view.model.get("_assessment")._singleSubmit._isEnabled !== true) return;
 
 			SingleSubmit.insertButton();
 
@@ -109,8 +109,8 @@ define(function(require) {
 			var articleId = Adapt.findById(blockId).get("_parentId");
 			var article = Adapt.findById(articleId);
 
-			if (!article.get("_assessment") && article.get("_assessment")._isEnable !== true) return;
-			if (!article.get("_assessment")._singleSubmit && article.get("_assessment")._singleSubmit._isEnable !== true) return;
+			if (typeof article.get("_assessment") === "undefined" ||article.get("_assessment")._isEnabled !== true) return;
+			if (typeof article.get("_assessment")._singleSubmit === "undefined" || article.get("_assessment")._singleSubmit._isEnabled !== true) return;
 
 			if (SingleSubmit.components.findWhere({ _id: componentId }) === undefined) return;
 
