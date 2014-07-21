@@ -57,24 +57,51 @@ define(function(require) {
 			var id = event.data._id;
 			
 			var canSubmit = true;
+			var count = 0;
 			_.each(SingleSubmit.componentViews, function(view) {
-				if (view.canSubmit && !view.canSubmit() ) canSubmit = false;
+				if (view.model.get("_isComplete")) return;
+				if (!view.model.get("_isVisible")) return;
+				if (typeof view.canSubmit !== "undefined") {
+					if (!view.canSubmit() ) canSubmit = false;
+					count++;
+				} else {
+					if (typeof view.model.get("_selectable") !== "undefined") {
+						if (view.model.get("_selectedItems").length === 0) canSubmit === false;
+						count++;
+					}
+				}
 			});
 
-			if (canSubmit)
+			if (canSubmit && count > 0)
 			SingleSubmit.view.$el.find(".buttons-action").removeAttr("disabled");
 
 		},
 		onSubmit: function() {
 			_.each(SingleSubmit.componentViews, function(view) {
+				if (!view.model.get("_isVisible")) return;
 				var submitButton = view.$el.find(".buttons-action");
+				if (submitButton.length === 0) submitButton = view.$el.find(".button.submit");
 				view.$el.off("inview", SingleSubmit.onInteraction);
 				view.$el.off("click", SingleSubmit.onInteraction);
 				if (submitButton.length === 0) return;
 				submitButton.trigger("click");
 			});
-			SingleSubmit.submitted = true;
+			//SingleSubmit.submitted = true;
 			SingleSubmit.view.$el.find(".buttons-action").attr("disabled","");
+		},
+		findById : function(id) {
+			if (Adapt.findById === undefined) {
+				var componentTypes = {
+					"co": "contentObjects",
+					"a": "articles",
+					"b": "blocks",
+					"c": "components"
+				};
+				var prefix = id.substr(0, id.indexOf("-"));
+				return Adapt[componentTypes[prefix]].findWhere({ _id: id });
+			} else {
+				return Adapt.findById(id);
+			}
 		}
 	});
 	SingleSubmit = new SingleSubmit();
@@ -106,8 +133,8 @@ define(function(require) {
 
 			var componentId = componentView.model.get('_id');
 			var blockId = componentView.model.get("_parentId");
-			var articleId = Adapt.findById(blockId).get("_parentId");
-			var article = Adapt.findById(articleId);
+			var articleId = SingleSubmit.findById(blockId).get("_parentId");
+			var article = SingleSubmit.findById(articleId);
 
 			if (typeof article.get("_assessment") === "undefined" ||article.get("_assessment")._isEnabled !== true) return;
 			if (typeof article.get("_assessment")._singleSubmit === "undefined" || article.get("_assessment")._singleSubmit._isEnabled !== true) return;
