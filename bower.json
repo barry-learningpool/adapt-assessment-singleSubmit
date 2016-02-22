@@ -1,14 +1,17 @@
 {
-  "name": "adapt-assessment-singleSubmit",
-  "homepage": "https://github.com/cgkineo/adapt-assessment-singleSubmit",
-  "authors": [
-    "Oliver Foster <oliver.foster@kineo.com"
-  ],
-  "description": "%description",
-  "main": "/js/adapt-assessment-singleSubmit.js",
-  "keywords": [
-    "adapt-plugin",
-    "adapt-extension"
-  ],
-  "license": "GPLv3"
+    "name": "adapt-assessment-singleSubmit",
+    "repository": "git://github.com/cgkineo/adapt-assessment-singleSubmit",
+    "framework": "^2.0.0",
+    "version": "2.0.0",
+    "homepage": "https://github.com/cgkineo/adapt-assessment-singleSubmit",
+    "issues": "https://github.com/cgkineo/adapt-assessment-singleSubmit/issues/",
+    "displayName": "Assessment Single Submit",
+    "extension": "assessment-singleSubmit",
+    "description": "Article single submit button",
+    "main": "/js/adapt-assessment-singleSubmit.js",
+    "keywords": [
+        "adapt-plugin",
+        "adapt-extension"
+    ],
+    "license": "GPLv3"
 }
